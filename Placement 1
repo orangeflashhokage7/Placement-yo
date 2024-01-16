@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class PlacementAnalysis {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            int c = scanner.nextInt(), e = scanner.nextInt(), m = scanner.nextInt();
+            if (c < 0 || e < 0 || m < 0) throw new Exception();
+
+            int max = Math.max(c, Math.max(e, m));
+            if (c == e && e == m) {
+                System.out.println("None of the department has got the highest placement");
+            } else {
+                System.out.println("Highest placement");
+                if (c == max) System.out.println("CSE");
+                if (e == max) System.out.println("ECE");
+                if (m == max) System.out.println("MECH");
+            }
+        } catch (Exception ex) {
+            System.out.println("Input is Invalid");
+        } finally {
+            scanner.close();
+        }
+    }
+}
