@@ -6,13 +6,12 @@ WHERE car_id IN (
     WHERE MONTH(pickup_date) = 5
     GROUP BY car_id
     HAVING COUNT(*) = (
-        SELECT MAX(NumDays)
-        FROM (
-            SELECT car_id, COUNT(*) AS NumDays
-            FROM rentals
-            WHERE MONTH(pickup_date) = 5
-            GROUP BY car_id
-        ) AS MaxDaysSubquery
+        SELECT COUNT(*) AS NumDays
+        FROM rentals
+        WHERE MONTH(pickup_date) = 5
+        GROUP BY car_id
+        ORDER BY NumDays DESC
+        LIMIT 1
     )
 )
 GROUP BY car_name;
