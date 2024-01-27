@@ -1,0 +1,15 @@
+SELECT
+    id,
+    name,
+    CASE
+        WHEN address IS NOT NULL THEN address
+        WHEN phone_number IS NOT NULL THEN phone_number
+        ELSE 'Not Available'
+    END AS Contact_Info,
+    fare_amount
+FROM
+    customers
+WHERE
+    email LIKE '%@gmail.com%'
+ORDER BY
+    name ASC;
