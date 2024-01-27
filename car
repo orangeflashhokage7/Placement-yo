@@ -5,12 +5,12 @@ WHERE car_id IN (
     FROM rentals
     WHERE MONTH(pickup_date) = 5
     GROUP BY car_id
-    HAVING COUNT(*) = (
-        SELECT COUNT(*) AS NumDays
+    HAVING DATEDIFF(MAX(return_date), MIN(pickup_date)) = (
+        SELECT DATEDIFF(MAX(return_date), MIN(pickup_date))
         FROM rentals
         WHERE MONTH(pickup_date) = 5
         GROUP BY car_id
-        ORDER BY NumDays DESC
+        ORDER BY DATEDIFF(MAX(return_date), MIN(pickup_date)) DESC
         LIMIT 1
     )
 )
